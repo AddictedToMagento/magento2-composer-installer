@@ -1,0 +1,51 @@
+{
+  "name": "addictedtomagento/magento2-composer-installer",
+  "description": "Composer Installer For Magento 2",
+  "authors": [
+    {
+      "name": "Daniel Rose",
+      "email": "daniel-rose@gmx.de"
+    },
+    {
+      "name": "David Verholen",
+      "email": "david@verholen.com"
+    }
+  ],
+  "type": "composer-plugin",
+  "keywords": [
+    "magento2",
+    "composer-installer"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4.0",
+    "composer-plugin-api": "^1.0",
+    "symfony/filesystem": "^2.7",
+    "symfony/finder": "^2.7"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8",
+    "mikey179/vfsStream": "^1.5",
+    "squizlabs/php_codesniffer": "^2.3",
+    "phpmd/phpmd": "^2.2",
+    "sebastian/phpcpd": "^2.0",
+    "composer/composer": "^1.0@alpha"
+  },
+  "replace": {
+    "magento-hackathon/magento-composer-installer": "*",
+    "bragento/magento-composer-installer": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AddictedToMagento\\Magento2\\Composer\\Installer\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AddictedToMagento\\Magento2\\Composer\\Installer\\": "tests"
+    }
+  },
+  "extra": {
+    "class": "AddictedToMagento\\Magento2\\Composer\\Installer\\Plugin"
+  }
+}
