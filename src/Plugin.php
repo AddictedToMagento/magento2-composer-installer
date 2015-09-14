@@ -2,12 +2,14 @@
 namespace AddictedToMagento\Magento2\Composer\Installer;
 
 use Composer\Composer;
+use Composer\DependencyResolver\Operation\InstallOperation;
+use Composer\DependencyResolver\Operation\UninstallOperation;
+use Composer\DependencyResolver\Operation\UpdateOperation;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Installer\PackageEvent;
 use Composer\Installer\PackageEvents;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
-use Composer\Script\ScriptEvents;
 
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
@@ -56,7 +58,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     public function deployAfterInstall(PackageEvent $event)
     {
-        // TODO: Implement deployAfterInstall(PackageEvent $event) method.
+        /** @var  $operation InstallOperation */
+        $operation = $event->getOperation();
+
+        $package = $operation->getPackage();
     }
 
     /**
@@ -66,11 +71,19 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     public function deployAfterUpdate(PackageEvent $event)
     {
-        // TODO: Implement deployAfterUpdate(PackageEvent $event) method.
+        /** @var  $operation UpdateOperation */
+        $operation = $event->getOperation();
+
+        $initialPackage = $operation->getInitialPackage();
+        $targetPackage = $operation->getTargetPackage();
     }
 
     public function deployAfterUninstall(PackageEvent $event)
     {
-        // TODO: Implement deployAfterUninstall(PackageEvent $event) method.
+        /** @var  $operation UninstallOperation */
+        $operation = $event->getOperation();
+
+        $package = $operation->getPackage();
+
     }
 }
