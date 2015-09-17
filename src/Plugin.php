@@ -1,6 +1,8 @@
 <?php
 namespace AddictedToMagento\Magento2\Composer\Installer;
 
+use AddictedToMagento\Magento2\Composer\Installer\Deployment\Install;
+use AddictedToMagento\Magento2\Composer\Installer\Plugin\DeploymentFactory;
 use Composer\Composer;
 use Composer\DependencyResolver\Operation\InstallOperation;
 use Composer\DependencyResolver\Operation\UninstallOperation;
@@ -34,9 +36,9 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            PackageEvents::POST_PACKAGE_INSTALL => 'deployAfterInstall',
-            PackageEvents::POST_PACKAGE_UNINSTALL => 'deployAfterUninstall',
-            PackageEvents::POST_PACKAGE_UPDATE => 'deployAfterUpdate'
+            PackageEvents::POST_PACKAGE_INSTALL     => 'deployAfterInstall',
+            PackageEvents::POST_PACKAGE_UNINSTALL   => 'deployAfterUninstall',
+            PackageEvents::POST_PACKAGE_UPDATE      => 'deployAfterUpdate'
         );
     }
 
@@ -48,7 +50,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     public function activate(Composer $composer, IOInterface $io)
     {
-        // TODO: Implement activate() method.
+
     }
 
     /**
@@ -60,8 +62,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     {
         /** @var  $operation InstallOperation */
         $operation = $event->getOperation();
-
         $package = $operation->getPackage();
+
+        $installDeployment = DeploymentFactory::createInstallDeployment($package);
+        $installDeployment->execute();
     }
 
     /**
@@ -76,14 +80,22 @@ class Plugin implements PluginInterface, EventSubscriberInterface
 
         $initialPackage = $operation->getInitialPackage();
         $targetPackage = $operation->getTargetPackage();
+
+        $uninstallDeployment = DeploymentFactory::createUninstallDeployment($initialPackage);
+        $uninstallDeployment->execute();
+
+        $installDeployment = DeploymentFactory::createInstallDeployment($targetPackage);
+        $installDeployment->execute();
     }
 
     public function deployAfterUninstall(PackageEvent $event)
     {
         /** @var  $operation UninstallOperation */
         $operation = $event->getOperation();
-
         $package = $operation->getPackage();
+
+        $uninstallDeployment = DeploymentFactory::createUninstallDeployment($package);
+        $uninstallDeployment->execute();
 
     }
 }
