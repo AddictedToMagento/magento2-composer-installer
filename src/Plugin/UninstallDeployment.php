@@ -10,7 +10,7 @@ class UninstallDeployment extends BaseDeployment
      */
     public function execute()
     {
-        if(!$this->canExecute()) {
+        if (!$this->canExecute()) {
             return;
         }
 

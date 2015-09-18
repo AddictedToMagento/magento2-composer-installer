@@ -1,7 +1,7 @@
 <?php
 namespace AddictedToMagento\Magento2\Composer\Installer\Plugin;
 
-use Composer\Package\Package;
+use Composer\Package\PackageInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
@@ -18,7 +18,7 @@ abstract class BaseDeployment
     protected $filesystem;
 
     /**
-     * @var Package
+     * @var PackageInterface
      */
     protected $package;
 
@@ -31,20 +31,20 @@ abstract class BaseDeployment
      * @var array
      */
     protected $installPaths = [
-        'magento2-module'       => 'app/code',
-        'magento2-theme'        => 'app/design',
-        'magento2-language'     => 'app/i18n',
-        'magento2-library'      => 'lib/internal',
-        'magento2-component'    => '.'
+        'magento2-module' => 'app/code',
+        'magento2-theme' => 'app/design',
+        'magento2-language' => 'app/i18n',
+        'magento2-library' => 'lib/internal',
+        'magento2-component' => '.'
     ];
 
     /**
      * Construct
      *
-     * @param Package $package
+     * @param PackageInterface $package
      */
     public function __construct(
-        Package $package
+        PackageInterface $package
     ) {
         $this->package = $package;
         $this->finder = new Finder();
@@ -66,8 +66,8 @@ abstract class BaseDeployment
     protected function canExecute()
     {
         return $this->getMapFrom() != ''
-            && $this->getMapFrom() != ''
-            && array_key_exists($this->package->getType(), $this->installPaths);
+        && $this->getMapFrom() != ''
+        && array_key_exists($this->package->getType(), $this->installPaths);
     }
 
     /**
@@ -96,13 +96,7 @@ abstract class BaseDeployment
      */
     protected function getMapFrom()
     {
-        $map = $this->getMap();
-
-        if (array_key_exists(0, $map) && array_key_exists(0, $map[0])) {
-            return $map[0][0];
-        }
-
-        return '';
+        return $this->getMapItem(0);
     }
 
     /**
@@ -112,10 +106,20 @@ abstract class BaseDeployment
      */
     protected function getMapTo()
     {
+        return $this->getMapItem(1);
+    }
+
+    /**
+     * @param $index
+     *
+     * @return string
+     */
+    protected function getMapItem($index)
+    {
         $map = $this->getMap();
 
-        if (array_key_exists(0, $map) && array_key_exists(1, $map[0])) {
-            return $map[0][1];
+        if (array_key_exists(0, $map) && array_key_exists($index, $map[0])) {
+            return $map[0][$index];
         }
 
         return '';
