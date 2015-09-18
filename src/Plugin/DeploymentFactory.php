@@ -1,14 +1,14 @@
 <?php
 namespace AddictedToMagento\Magento2\Composer\Installer\Plugin;
 
-use Composer\Package\Package;
+use Composer\Package\PackageInterface;
 
 class DeploymentFactory
 {
     /**
      * Create install deployment
      *
-     * @param Package $package
+     * @param PackageInterface $package
      * @return InstallDeployment
      */
     public static function createInstallDeployment($package)
@@ -19,7 +19,7 @@ class DeploymentFactory
     /**
      * Create uninstall deployment
      *
-     * @param Package $package
+     * @param PackageInterface $package
      * @return UninstallDeployment
      */
     public static function createUninstallDeployment($package)

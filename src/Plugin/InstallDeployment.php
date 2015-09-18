@@ -15,7 +15,7 @@ class InstallDeployment extends BaseDeployment
      */
     public function execute()
     {
-        if(!$this->canExecute()) {
+        if (!$this->canExecute()) {
             return;
         }
 
@@ -30,6 +30,7 @@ class InstallDeployment extends BaseDeployment
         $firstPartOfFromPath = $this->getFirstPartOfFromPath();
         $firstPartOfToPath = $this->getFirstPartOfToPath();
 
+        /** @var SplFileInfo $value */
         foreach ($this->finder->in($firstPartOfFromPath) as $value) {
             $fromPath = $value->getPathName();
             $toPath = $firstPartOfToPath . DIRECTORY_SEPARATOR . str_replace($firstPartOfFromPath, '', $fromPath);
