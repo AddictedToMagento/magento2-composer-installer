@@ -1,5 +1,6 @@
 # Magento 2 Composer Installer
 
+[![Build Status](https://travis-ci.org/AddictedToMagento/magento2-composer-installer.svg?branch=master)](https://travis-ci.org/AddictedToMagento/magento2-composer-installer)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AddictedToMagento/magento2-composer-installer/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/AddictedToMagento/magento2-composer-installer/?branch=develop)
 
 ## Usage
