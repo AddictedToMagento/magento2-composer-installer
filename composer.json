@@ -1,6 +1,6 @@
 {
   "name": "addictedtomagento/magento2-composer-installer",
-  "description": "Composer Installer For Magento 2",
+  "description": "Composer installer For Magento 2",
   "authors": [
     {
       "name": "Daniel Rose",
