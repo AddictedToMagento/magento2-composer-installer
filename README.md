@@ -1,5 +1,7 @@
 # Magento 2 Composer Installer
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AddictedToMagento/magento2-composer-installer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AddictedToMagento/magento2-composer-installer/?branch=master)
+
 ## Usage
 
 In `composer.json` of the component specify:

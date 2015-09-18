@@ -45,7 +45,7 @@ class InstallDeploymentTest extends \PHPUnit_Framework_TestCase
     public function testExecute()
     {
         $this->installDeployment->execute();
-        $this->assertTrue($this->fileSystem->exists('filesystem/app/code/Vendor/Project/README.MD'));
+        $this->assertTrue($this->fileSystem->exists('app/code/Vendor/Project/README.MD'));
     }
 
     /**
