@@ -11,8 +11,16 @@ class InstallDeploymentTest extends \PHPUnit_Framework_TestCase
      * @var Filesystem
      */
     protected $fileSystem;
+
+    /**
+     * @var InstallDeployment
+     */
     protected $installDeployment;
 
+    /**
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     */
     protected function setUp()
     {
         $this->fileSystem = new Filesystem();
@@ -29,12 +37,19 @@ class InstallDeploymentTest extends \PHPUnit_Framework_TestCase
         $this->installDeployment = DeploymentFactory::createInstallDeployment($package);
     }
 
+    /**
+     * Test execute method of install deployment
+     */
     public function testExecute()
     {
         $this->installDeployment->execute();
         $this->assertTrue($this->fileSystem->exists('app/code/Vendor/Project/README.MD'));
     }
 
+    /**
+     * Tears down the fixture, for example, close a network connection.
+     * This method is called after a test is executed.
+     */
     protected function tearDown()
     {
         $this->fileSystem->remove('vendor');
