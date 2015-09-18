@@ -32,6 +32,7 @@
     "composer/composer": "^1.0@alpha"
   },
   "replace": {
+    "magento/magento-composer-installer": "*",
     "magento-hackathon/magento-composer-installer": "*",
     "bragento/magento-composer-installer": "*"
   },

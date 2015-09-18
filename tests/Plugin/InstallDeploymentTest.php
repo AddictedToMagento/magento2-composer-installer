@@ -25,8 +25,10 @@ class InstallDeploymentTest extends \PHPUnit_Framework_TestCase
     {
         $this->fileSystem = new Filesystem();
 
-        $this->fileSystem->mkdir('vendor/vendor/project/src');
-        $this->fileSystem->touch('vendor/vendor/project/src/README.MD');
+        $this->fileSystem->mkdir('filesystem/vendor/vendor/project/src');
+        $this->fileSystem->touch('filesystem/vendor/vendor/project/src/README.MD');
+
+        chdir('filesystem');
 
         $package = $this->getMock(Package::class, ['getName', 'getType', 'getExtra'], [], '', false);
         $package->method('getName')->willReturn('vendor/project');
@@ -43,7 +45,7 @@ class InstallDeploymentTest extends \PHPUnit_Framework_TestCase
     public function testExecute()
     {
         $this->installDeployment->execute();
-        $this->assertTrue($this->fileSystem->exists('app/code/Vendor/Project/README.MD'));
+        $this->assertTrue($this->fileSystem->exists('filesystem/app/code/Vendor/Project/README.MD'));
     }
 
     /**
@@ -52,7 +54,8 @@ class InstallDeploymentTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->fileSystem->remove('vendor');
-        $this->fileSystem->remove('app');
+        chdir('../');
+
+        $this->fileSystem->remove('filesystem');
     }
 }
